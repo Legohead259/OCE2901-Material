@@ -1,0 +1,6 @@
+PWD c:/Users/legoh/OneDrive - Florida Institute of Technology/School/2023 Spring/OCE2901/Lecture Notes/docs/chapters
+INPUT c:/texlive/2022/texmf.cnf
+INPUT c:/texlive/2022/texmf-dist/web2c/texmf.cnf
+INPUT c:/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT c:/Users/legoh/OneDrive - Florida Institute of Technology/School/2023 Spring/OCE2901/Lecture Notes/docs/chapters/syllabus.tex
+OUTPUT .latexoutput/syllabus.log
