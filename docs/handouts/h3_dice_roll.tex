@@ -1,0 +1,114 @@
+% ===========================================
+% HOMEWORK 3: Dice Roll
+% Written by: Braidan Duffy
+%
+% Date: 12/28/2022
+% Last Revision: 12/28/2022
+% ============================================
+
+\documentclass[
+	letterpaper, % Page size
+	fontsize=10pt, % Base font size
+	twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+	%open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
+	%chapterentrydots=true, % Uncomment to output dots from the chapter name to the page number in the table of contents
+	numbers=noenddot, % Comment to output dots after chapter numbers; the most common values for this option are: enddot, noenddot and auto (see the KOMAScript documentation for an in-depth explanation)
+]{kaobook}
+
+\begin{document}
+
+\chapter*{Homework 3: Dice Roll}
+
+\section*{Overview}
+This homework assignment is the first assignment designed to get you familiar with the programming basics.
+Your objective is to perform a series of simulated "dice rolls", perform a basic statistical analysis, and plot the results.
+You can do this either in Python or MATLAB, but keep in mind that you should use whatever programming language your group is using for the research topic. \marginnote{\emph{For extra credit:} You may do this assignment in both languages}
+
+You will first roll an individual dice 10 and 1000 times, calculating the mean, standard deviation, and histogram for each set.
+Then, you will roll two dice, adding together their sums, 10 and 1000 times.
+Again, calculating the mean, standard deviation, and histogram for each set of rolls.
+
+\section*{Requirements}
+To fulfill this project, you must successfully program a script that utilizes several different functions and loops to simulate dice rolls and calculate the statistics.
+Each function should have a practical name, be easy to read and understand, and function.
+You should also comment appropriately throughout the program such that someone else could understand what is occurring.
+
+\section*{Submission}
+You will submit the following to the Canvas assignment box:
+\begin{enumerate}
+    \item A summary document with tables of the statistical parameters and copies of the generated histograms
+    \item A well-documented code file OR
+    \item An organized zipped archive of well-documented code source files. Make sure the main script is named properly.
+\end{enumerate}
+
+\marginnote[-0.75in]{Documents that contain the figures and printouts with the code, such as Jupyter notebooks, will also be accepted in lieu of the other submission items.}
+
+Note that any submitted code needs to be able to be executed without any errors or importing any additional libraries.
+Therefore, if you do anything tricky with libraries or external functions, be sure to include those source files appropriately.
+Additionally, the main script should be named in the following format: \lstinline{h[#]_[ASSIGNMENT NAME]_[LAST NAME].[EXTENSION]}, for example, \lstinline{h3_dice_roll_duffy.ipynb}
+
+\section*{Grading}
+You will be graded on the following criteria:
+
+\begin{margintable}
+    \begin{tabular}{l | c}
+        \toprule
+        \multicolumn{1}{c|}{\textbf{Criterion}} & \textbf{Points} \\
+        \midrule
+        Efficacy & 60 \\
+        Code Neatness & 20 \\
+        Output Neatness & 20 \\
+        Multilingual (EC) & 20 \\
+        Additional Functions (EC) & 10 each \\
+        \bottomrule
+    \end{tabular}
+\end{margintable}
+
+\pagelayout{wide} % Remove margins
+
+\section*{Extra Credit}
+If you are willing to dig in a little bit more, this project has a couple of opportunities to earn extra credit points at the discretion of the instructor.
+First, you may do this assignment in both Python and MATLAB. 
+Being able to work with multiple programming languages is an extremely useful skill.
+Python and MATLAB are also close enough in syntax that the code should not have to change much between them!
+
+Additionally, you may write up to three different operations with the dice rolling and provide the same output for each.
+For 10 points of extra credit each, you may write functions that subtract, multiply, and divide the rolls of two dice for 10 and 1000 rolls.
+You will only be granted the extra credit points if the full output for each operation is provided!
+
+\section*{Psuedocode}
+For those that are new to programming, a suggested code layout is given below in psuedocode to guide you.
+
+\begin{lstlisting}[style=kaolstplain, linewidth=1.5\textwidth]
+    Program: Dice Roll
+    
+    Define 
+
+    Function: Setup
+        Initialize Serial communication for debugging
+        Initialize input pins
+        Initialize output pins
+    
+    Function: Loop
+        Check for button pressed
+        If button is pressed then
+            If the current LED mode is the last LED mode
+                Reset the current LED mode to the first one
+            Else
+                Increment the LED mode by 1
+        Switch the current LED mode
+            Case the current LED mode is set to 0
+                Execute first LED function
+            Case the current LED mode is set to 1
+                Execute second LED function
+            Case the current LED mode is set to 2
+                Execute third LED function
+            ...
+    
+    Function: First LED Function
+        [YOUR CODE HERE]
+    ...
+    
+    \end{lstlisting}
+
+\end{document}
