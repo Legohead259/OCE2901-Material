@@ -41,11 +41,11 @@ You will submit the following to the Canvas assignment box:
     \item An organized zipped archive of well-documented code source files. Make sure the main script is named properly.
 \end{enumerate}
 
+\marginnote{The main script should be named in the following format: \lstinline{h[#]_[ASSIGNMENT NAME]_[LAST NAME].[EXTENSION]}, for example, \lstinline{h3_dice_roll_duffy.ipynb}}
+
 \marginnote[-0.75in]{Documents that contain the figures and printouts with the code, such as Jupyter notebooks, will also be accepted in lieu of the other submission items.}
 
-Note that any submitted code needs to be able to be executed without any errors or importing any additional libraries.
-Therefore, if you do anything tricky with libraries or external functions, be sure to include those source files appropriately.
-Additionally, the main script should be named in the following format: \lstinline{h[#]_[ASSIGNMENT NAME]_[LAST NAME].[EXTENSION]}, for example, \lstinline{h3_dice_roll_duffy.ipynb}
+Note that any submitted code needs to be able to be executed without any errors. Any additional libraries need to be able to be installed using a package manager like pip.
 
 \section*{Grading}
 You will be graded on the following criteria:
@@ -70,7 +70,7 @@ You will be graded on the following criteria:
 If you are willing to dig in a little bit more, this project has a couple of opportunities to earn extra credit points at the discretion of the instructor.
 First, you may do this assignment in both Python and MATLAB. 
 Being able to work with multiple programming languages is an extremely useful skill.
-Python and MATLAB are also close enough in syntax that the code should not have to change much between them!
+Python and MATLAB are also close enough in syntax that the code should not have to change much between them.
 
 Additionally, you may write up to three different operations with the dice rolling and provide the same output for each.
 For 10 points of extra credit each, you may write functions that subtract, multiply, and divide the rolls of two dice for 10 and 1000 rolls.
@@ -79,35 +79,42 @@ You will only be granted the extra credit points if the full output for each ope
 \section*{Psuedocode}
 For those that are new to programming, a suggested code layout is given below in psuedocode to guide you.
 
-\begin{lstlisting}[style=kaolstplain, linewidth=1.5\textwidth]
-    Program: Dice Roll
+\begin{lstlisting}[style=kaolstplain, linewidth=1.5\textwidth]    
+    Function: Roll One Die
+        Argument: iterations
+        Initialize zeroes array of length iterations
+        For every iteration
+            Sample a random integer from [1, 6]
+            Add sample to array
+        Returns: array of random samples, mean of array, stdev of array
     
-    Define 
+    Function: Roll Two Dice and Sum
+        Argument: iterations
+        Initialize zeroes array of length iterations
+        For every iteration
+            Sample two random integers from [1, 6] and add together
+            Add the summation to array
+        Returns: array of summed samples, mean of array, stdev of array
 
-    Function: Setup
-        Initialize Serial communication for debugging
-        Initialize input pins
-        Initialize output pins
-    
-    Function: Loop
-        Check for button pressed
-        If button is pressed then
-            If the current LED mode is the last LED mode
-                Reset the current LED mode to the first one
-            Else
-                Increment the LED mode by 1
-        Switch the current LED mode
-            Case the current LED mode is set to 0
-                Execute first LED function
-            Case the current LED mode is set to 1
-                Execute second LED function
-            Case the current LED mode is set to 2
-                Execute third LED function
-            ...
-    
-    Function: First LED Function
-        [YOUR CODE HERE]
-    ...
+    Calculate array, mean, and stdev for 10 single rolls
+    Calculate array, mean, and stdev for 1000 single rolls
+
+    Generate output table for single rolls and print
+
+    Create singular die roll figure with two subplots
+    Plot bar graph for 10 die rolls
+    Plot bar graph for 1000 die rolls
+    Show figure
+
+    Calculate array, mean, stdev for 10 summed dice rolls
+    Calculate array, mean, stdev for 1000 summed dice rolls
+
+    Generate output table for summed rolls and print
+
+    Create summed dice roll figure with two subplots
+    Plot bar graph for 10 summed dice rolls
+    Plot bar graph for 1000 summed dice rolls
+    Show figure
     
     \end{lstlisting}
 
