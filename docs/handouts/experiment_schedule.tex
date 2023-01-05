@@ -1,0 +1,76 @@
+% ===========================================
+% Experiment Schedule
+% Written by: Braidan Duffy
+%
+% Date: 01/05/2023
+% Last Revision: 01/05/2023
+% ============================================
+
+\documentclass[
+	letterpaper, % Page size
+	fontsize=10pt, % Base font size
+	twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+	%open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
+	%chapterentrydots=true, % Uncomment to output dots from the chapter name to the page number in the table of contents
+	numbers=noenddot, % Comment to output dots after chapter numbers; the most common values for this option are: enddot, noenddot and auto (see the KOMAScript documentation for an in-depth explanation)
+]{kaobook}
+
+\begin{document}
+
+\chapter*{Experiment Schedule}
+
+\section*{Overview}
+For this assignment, your group will be determining the primary and secondary testing days during the assigned testing week.
+Give each calendar day a "surfability" score from 0-100, 100 being the most ideal day, 0 being the least. 
+\marginnote{This includes weeks where you do not have to be testing.
+Always prepare for the worst!}
+
+You surfability score can factor in the tidal height, low tide time, predicted wave heights and periods, and the predicted wind speed and direction, with different weights for each.
+For example, a day where low tide occurs around 0900, waves are expected to be 3-feet tall at 12 seconds, and winds are blowing offshore at 5-10 kts would receive a very high surfability score near 100.
+For days where the opposite conditions occur, the surfability score would be very low.
+
+Note that the instructor is required to be present while you are collecting field data.
+Therefore, you should coordinate with them to determine their schedule and use it as a basis for your date selections.
+Also, weekends are optional, but not encouraged.
+The instructor may not be able to meet on those days and may not be able to guarantee they will be there either.
+
+\marginnote{\emph{For extra credit:} Write a script or series of scripts that scrape data from online APIs and automatically calculate the surfability scores for your given range of days!}
+
+\section*{Requirements}
+Your calendar must include the following:
+
+\begin{enumerate}
+	\item Your team name at the top of the first page
+	\item All of the calendar days between February 20 and April 21 with appropriate and easy-to-understand formatting - follow the layout of a typical calendar
+	\item An assigned surfability score for each calendar day (excluding weekends, if you wish)
+	\item Two highlighted days for every week in different colors. One color shall be designated primary, the other, secondary.
+	\item A table on a separate page or document that details individual contributions to the calendar
+\end{enumerate}
+
+\pagebreak
+
+\section*{Submission}
+You will submit te following to the Canvas submission box:
+
+\begin{enumerate}
+	\item A calendar in PDF form that conforms to the Requirements section
+	\item (optional) A separate document that details individual member's contributions to the calendar
+	\item (extra credit) A script or zipped archive of scripts that calculate the surfability score automatically
+\end{enumerate}
+
+\marginnote[-0.5in]{An submitted code must follow the same submission rules as the previous homework assignments.}
+
+\section*{Grading}
+This assignment will use a pass-fail scheme.
+Your calendar must present adequate detail for choosing the ideal dates for testing and clearly show this information.
+If the instructor determines that the calendar does not meet the given requirements, the grade shall be a 0 for the whole team with the option to redo for half credit.
+
+\section*{Extra Credit}
+There is an opportunity for extra credit on this assignment, at the discretion of the instructor!
+To receive this credit, you must write a script or series of scripts that scrape data from online APIs such as NOAA and Surfline to get predictions.
+Then, your script must calculate your surfability score and report it for each potential testing day.
+The code submission \emph{must} follow the submission guidelines for the previous homework assignments in order to receive credit.
+
+The amount of credit granted by the instructor is up to their discretion but will not exceed 50\% of the overall assignment value.
+
+\end{document}
