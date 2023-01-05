@@ -1,0 +1,76 @@
+% ===========================================
+% HOMEWORK 4: Data Plotting
+% Written by: Braidan Duffy
+%
+% Date: 01/05/2023
+% Last Revision: 01/05/2023
+% ============================================
+
+\documentclass[
+	letterpaper, % Page size
+	fontsize=10pt, % Base font size
+	twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+	%open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
+	%chapterentrydots=true, % Uncomment to output dots from the chapter name to the page number in the table of contents
+	numbers=noenddot, % Comment to output dots after chapter numbers; the most common values for this option are: enddot, noenddot and auto (see the KOMAScript documentation for an in-depth explanation)
+]{kaobook}
+
+\begin{document}
+
+\chapter*{Homework 4: Data Plotting}
+
+\section*{Overview}
+This homework assignment is intended to get you more familiar with the practical applications of data science with MATLAB and Python.
+You will be writing an analysis script that can import a data file from the HOBO, Thetis, and Lowell instruments, parse said file, then plot the data with appropriate title, labels and axes scales. \marginnote{\emph{For extra credit:} You may do this assignment in both languages}
+
+\section*{Requirements}
+To fulfill this project, you must successfully program a script that utilizes several different functions and plots to display real time series data from our instruments!
+Each function should have a practical name, be easy to read and understand, and work.
+You should also comment appropriately throughout the program such that someone else could understand what is occurring.
+
+You will need a function for each instrument that will import the time series data given a file path, start index, end index, and any additional arguments you need.
+Then, you will need to create a figure for each time series and plot the data with an appropriate title, labels, and axes scales.
+
+\textbf{\emph{GRADUATE STUDENTS:}} You will take this a step forward and have an additional subplot that windows the data into a view of \emph{significant} interest. 
+Make sure that the timestamps for all three series align.
+In your submission, briefly discuss why you windowed this period and what you believe it means.
+
+\section*{Submission}
+You will submit the following to the Canvas assignment box:
+\begin{enumerate}
+    \item A summary document with tables, figures, and any other relevant information from your analysis
+    \item A well-documented code file OR
+    \item An organized zipped archive of well-documented code source files. Make sure the main script is named properly.
+\end{enumerate}
+
+\marginnote{The main script should be named in the following format: \lstinline{h[#]_[ASSIGNMENT NAME]_[LAST NAME].[EXTENSION]}, for example, \lstinline{h4_data_plots_duffy.ipynb}}
+
+\marginnote[-1.25in]{Documents that contain the figures and printouts with the code, such as Jupyter notebooks, will also be accepted in lieu of the other submission items.}
+
+Note that any submitted code needs to be able to be executed without any errors. Any additional libraries need to be able to be installed using a package manager like pip.
+
+\pagelayout{wide} % Remove margins
+
+\section*{Grading}
+You will be graded on the following criteria:
+
+\begin{table}[h!]
+    \begin{tabular}{l | c}
+        \toprule
+        \multicolumn{1}{c|}{\textbf{Criterion}} & \textbf{Points} \\
+        \midrule
+        Efficacy & 60 \\
+        Code Neatness & 20 \\
+        Output Neatness & 20 \\
+        Multilingual (EC) & 20 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\section*{Extra Credit}
+If you are willing to dig in a little bit more, this project has an opportunity to earn extra credit points at the discretion of the instructor.
+You may do this assignment in both Python and MATLAB. 
+Being able to work with multiple programming languages is an extremely useful skill.
+Python and MATLAB are also close enough in syntax that the code should not have to change much between them.
+
+\end{document}
