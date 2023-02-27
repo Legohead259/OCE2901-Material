@@ -21,7 +21,9 @@
 
 \section*{Overview}
 This homework assignment is intended to get you more familiar with the practical applications of data science with MATLAB and Python.
-You will be writing an analysis script that can import a data file from the HOBO, Thetis, and Lowell instruments, parse said file, then plot the data with appropriate title, labels and axes scales. \marginnote{\emph{For extra credit:} You may do this assignment in both languages}
+You will be writing an analysis script that can import a data file from the HOBO, Thetis, and Lowell instruments, parse said file, then plot the data with appropriate title, labels and axes scales. 
+After plotting the raw data, you will be designing a digital filter and applying it to your data to "smooth" out the signals. 
+\marginnote{\emph{For extra credit:} You may do this assignment in both languages}
 
 \section*{Requirements}
 To fulfill this project, you must successfully program a script that utilizes several different functions and plots to display real time series data from our instruments!
@@ -30,10 +32,16 @@ You should also comment appropriately throughout the program such that someone e
 
 You will need a function for each instrument that will import the time series data given a file path, start index, end index, and any additional arguments you need.
 Then, you will need to create a figure for each time series and plot the data with an appropriate title, labels, and axes scales.
+You will then design a filter of your choice and apply it to the data to "smooth" out, or remove, any high frequency noise in the signal.
+Explain the impact of your filter and why you chose your particular method.
 
-\textbf{\emph{GRADUATE STUDENTS:}} You will take this a step forward and have an additional subplot that windows the data into a view of \emph{significant} interest. 
-Make sure that the timestamps for all three series align.
-In your submission, briefly discuss why you windowed this period and what you believe it means.
+\textbf{\emph{GRADUATE STUDENTS:}} You will take this a step forward by designing and applying a high pass, low pass, and band pass filter to each time series and explaining the impacts on your data.
+Support your analysis with Bode plots that show the magnitude and phase shift of each filter.
+In your submission, briefly discuss whether or not is it better to apply a band-pass filter or cascade a high-pass and low-pass filter together.
+Also discuss the impact the filter phase shift will have on your time series and suggest programmatic ways to reduce this shift.
+\marginnote{\emph{Hint:} MATLAB has already figured this part out, you just have to find out how and what they do.}
+
+\pagebreak
 
 \section*{Submission}
 You will submit the following to the Canvas assignment box:
@@ -49,7 +57,7 @@ You will submit the following to the Canvas assignment box:
 
 Note that any submitted code needs to be able to be executed without any errors. Any additional libraries need to be able to be installed using a package manager like pip.
 
-\pagelayout{wide} % Remove margins
+% \pagelayout{wide} % Remove margins
 
 \section*{Grading}
 You will be graded on the following criteria:
@@ -59,7 +67,7 @@ You will be graded on the following criteria:
         \toprule
         \multicolumn{1}{c|}{\textbf{Criterion}} & \textbf{Points} \\
         \midrule
-        Efficacy & 60 \\
+        Summary Document & 60 \\
         Code Neatness & 20 \\
         Output Neatness & 20 \\
         Multilingual (EC) & 20 \\
