@@ -4,4 +4,4 @@ docs/.secret/project**/.latexoutput/
 recordings/
 *.bkp
 *.dtmp
-*/.venv/
+.venv/

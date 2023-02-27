@@ -5,6 +5,7 @@ import datetime as dt
 import matplotlib.pyplot as plt
 from scipy.signal import detrend, butter, freqs, filtfilt, freqz
 from pathlib import Path
+from math import pi, pow
 
 # DATA_DIR = "src/data_processing/data/"
 DATA_DIR = "data/"
@@ -99,6 +100,7 @@ class Sensor:
         _xlab = kwargs.get("xlabel", '')
         _ylab = kwargs.get("ylabel", '')
         _xlim = kwargs.get("xlim", (None, None))
+        _ylim = kwargs.get("ylim", (None, None))
         
         _f = None
         _ax = ax
@@ -109,6 +111,7 @@ class Sensor:
         _ax.set_xlabel(_xlab)
         _ax.set_ylabel(_ylab)
         _ax.set_xlim(_xlim)
+        _ax.set_ylim(_ylim)
         return (_f, _ax)
 
     
@@ -146,6 +149,8 @@ class HOBOSensor(Sensor):
     surface: np.ndarray = 0
     mwl: float = 0
 
+    upcross_times: np.ndarray = 0
+    waves: list = []
 
     def __init__(self, sensor_id: str, sensor_name: str, data_filename: str, fs: int=1, rho: int=1025, g: float=9.81) -> None:
         super().__init__(sensor_id, sensor_name, data_filename, fs)
@@ -202,6 +207,102 @@ class HOBOSensor(Sensor):
         mwl = np.mean(pressure)*1000 / (self._rho * self._g)
         eta = np.divide(detrend(pressure)*1000, (self._rho * self._g))
         return (eta, mwl)
+    
+
+    def wave_by_wave(self):
+        _wave = {"start time": None, 
+                 "surface": None,
+                 "height": None, 
+                 "period": None,
+                 "length": None,
+                 "iribarren": None}
+        
+        _index = 0 # Initialize upcross indexes
+        neg_data_locs = np.where(self.surface < 0)[0] # Generate index array of negative values
+        for i in range(0, len(neg_data_locs)): # Iterate through all negative values to find upcrossings
+            try:
+                if self.surface[neg_data_locs[i]+1] >= 0: # Identify locations of upcrossings
+                    self.upcross_times = np.append(self.upcross_times, neg_data_locs[i])
+                    _index += 1
+            except:
+                continue
+        
+        for i in range(1,len(self.upcross_times)-1):
+            _wave["start time"] = self.upcross_times[i]
+            _wave["surface"] = self.surface[int(self.upcross_times[i]):int(self.upcross_times[i+1])]
+            _wave["height"] = np.max(_wave["surface"]) - np.min(_wave["surface"])
+            _wave["period"] = (self.upcross_times[i+1] - self.upcross_times[i]) / self.fs
+            _wave["length"] = self._g / (2*pi) * pow(_wave["period"], 2)
+            self.waves.append(dict(_wave))
+
+        # Calculate height data
+        _heights = [w["height"] for w in self.waves]
+        H_avg = np.mean(_heights)
+        _heights = np.sort(_heights)[::-1] # Sort the wave heights in descending order
+        H_sig = np.mean(_heights[1:round(len(_heights)/2)])
+        H_rms = np.sqrt(np.mean(np.square(_heights)))
+
+        # Calculate period data
+        _periods = [w["period"] for w in self.waves]
+        T_avg = np.mean(_periods)
+        _periods = np.sort(_periods)[::-1] # Sort the wave heights in descending order
+        T_sig = np.mean(_periods[1:round(len(_periods)/2)])
+        T_rms = np.sqrt(np.mean(np.square(_periods)))
+
+        return (H_avg, H_sig, H_rms, T_avg, T_sig, T_rms)
+    
+
+    def plot_wave_by_wave(self, **kwargs):
+        fig, ax = plt.subplots(1,1, figsize=self._DEFAULT_SINGLE_FIG_SIZE)
+        _, ax = super().plot_time_series(self.surface, ax, title="Surface Elevation with Upcrossing Markers", ylabel=self._DEFAULT_SURFACE_YLABEL, **kwargs)
+        ax.hlines(0, ax.get_xlim()[0], ax.get_xlim()[1], linestyles='--', colors='k')
+        ax.vlines(self.timestamp[self.upcross_times], ax.get_ylim()[0], ax.get_ylim()[1], linestyles='--', colors='r')
+
+        return (fig, ax)
+    
+
+    def plot_histogram(self, **kwargs):
+        _nbins = kwargs.get("nbins", 20)
+
+        _heights = [w["height"] for w in self.waves]
+
+        fig, ax = plt.subplots(1, 1, figsize=self._DEFAULT_SINGLE_FIG_SIZE)
+        fig.suptitle("Wave Height Histogram " + self.sensor_name)
+        ax.hist(_heights, _nbins, edgecolor='k')
+        ax.set_xlabel("Wave Height [m]")
+        ax.set_ylabel("Num. of Occurrences")
+
+        return fig, ax
+    
+
+    def plot_pdfcdf(self, **kwargs):
+        _nbins = kwargs.get("nbins", 20)
+        _ylim = kwargs.get("ylim", (None, None))
+
+        _heights = [w["height"] for w in self.waves]
+
+        x: np.ndarray = np.array([])
+        counts, edges = np.histogram(_heights, bins=_nbins)
+        for i in range(0, len(edges)-1): # For every bin edge value
+            x = np.append(x, (edges[i+1] + edges[i]) / 2) # Determine the bin center from the average of the edges
+        pdf = counts / len(_heights)
+        cdf = np.cumsum(pdf)
+
+        fig, ax = plt.subplots(1, 1, figsize=self._DEFAULT_SINGLE_FIG_SIZE)
+        fig.suptitle("Probability/Cumulative Distribution Function")
+        ax.plot(x, pdf)
+        ax.plot(x, cdf)
+        ax.set_xlabel("Wave Height [m]")
+        ax.set_ylabel("Probability of Occurrence")
+        ax.legend(["PDF", "CDF"])
+        ax.set_ylim(_ylim[0], _ylim[1])
+        
+        ax2 = ax.twinx()
+
+        return fig, ax, pdf, cdf
+
+
+
 
 
 class LowellSensor(Sensor):
