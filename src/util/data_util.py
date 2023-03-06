@@ -35,15 +35,15 @@ class QuatData:
 
 @dataclass
 class IMUData:
-    accel_data: ThreeAxisData = ThreeAxisData()
-    gyro_data: ThreeAxisData = ThreeAxisData()
-    mag_data: ThreeAxisData = ThreeAxisData()
+    accel_data: ThreeAxisData = None
+    gyro_data: ThreeAxisData = None
+    mag_data: ThreeAxisData = None
 
 
 @dataclass
 class AHRSData:
-    euler: EulerData = EulerData()
-    quat: QuatData = EulerData()
+    euler: EulerData = None
+    quat: QuatData = None
 
 
 class Sensor:
@@ -302,9 +302,6 @@ class HOBOSensor(Sensor):
         return fig, ax, pdf, cdf
 
 
-
-
-
 class LowellSensor(Sensor):
     imu_data = IMUData()
     ahrs_data = AHRSData()
@@ -376,6 +373,10 @@ class ThetisSensor(Sensor):
         _quat = QuatData(df["quatW"].to_numpy(), df["quatX"].to_numpy(), df["quatY"].to_numpy(), df["quatZ"].to_numpy())
         self.ahrs_data = AHRSData(_euler, _quat)
 
+    
+    def plot_all_data(self, **kwargs):
+        return self.plot_imu_data()
+
 
     def plot_imu_data(self, **kwargs):
         _figsize = kwargs.get("figsize", self._DEFAULT_TRIPLE_FIG_SIZE)
@@ -403,4 +404,4 @@ class ThetisSensor(Sensor):
 
 
     def plot_mag_series(self, ax: plt.Axes=None, **kwargs):
-        return super().plot_ndim_time_series((self.imu_data.mag_data.x, self.imu_data.mag_data.y, self.imu_data.mag_data.z), ax, title="Magnetometer Data Over Time", ylabel=self._DEFAULT_MAG_YLABEL, **kwargs)
+        return super().plot_ndim_time_series((self.imu_data.mag_data.x, self.imu_data.mag_data.y, self.imu_data.mag_data.z), ax, title="Magnetometer Data Over Time", ylabel=self._DEFAULT_MAG_YLABEL, **kwargs)        
