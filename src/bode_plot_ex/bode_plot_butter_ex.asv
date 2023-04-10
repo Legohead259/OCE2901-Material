@@ -1,0 +1,26 @@
+%% Bode Plot Example - OCE2901
+% By: Braidan Duffy
+% Date Created: 2023-02-07
+% Last Revision: 2023-02-07
+
+clear all; close all; clf;
+
+fc = 30; % Cut-off frequency
+fs = 1000; % Sample frequency
+
+[b, a] = butter(10, fc/(fs/2)); % Butterworth of order 6
+
+freqz(b, a, [], fs); % Bode Plot
+subplot(2,1,1)
+ylim([-100, 20])
+
+x = linspace(0, 1000, 1000);
+data_in = sin(x) + randn(1, 1000);
+data_out = filtfilt(b, a, data_in);
+
+figure
+hold on
+plot(x, data_in)
+plot(x, data_out)
+legend("raw", "filtered")
+hold off
